@@ -1,0 +1,54 @@
+<c-row class="g-4" *ngIf=" watchList$ | async as userList">
+
+  <c-col sm="6" xl="3">
+    <c-widget-stat-a [title]="'Баланс'" color="primary">
+      <ng-template  cTemplateId="widgetValueTemplate" ngPreserveWhitespaces>
+        <span>$ {{ Math.floor(+userList.data?.balance?.withIncome!) }}</span>
+        <span class="fw-normal" style="font-size: 14px;">
+          <svg cIcon [name]="userList.data?.profit?.percent! > 0 ? 'cilArrowTop' : userList.data?.profit?.percent! < 0 ? 'cilArrowBottom' : ''" size="sm"></svg>
+          ( {{ userList.data?.profit?.percent!.toFixed(1) }} % )
+        </span>
+      </ng-template>
+    </c-widget-stat-a>
+  </c-col>
+
+  <c-col sm="6" xl="3">
+    <c-widget-stat-a [title]="'Прибыль'" [color]="Math.floor(+userList.data?.profit?.balance!) == 0 ? 'warning' : Math.floor(+userList.data?.profit?.balance!) > 0 ? 'success' : 'danger'">
+      <ng-template cTemplateId="widgetValueTemplate" ngPreserveWhitespaces>
+        <span>$ {{ Math.floor(+userList.data?.profit?.balance!) }}</span>
+        <span class="fw-normal" style="font-size: 14px;">
+          ( {{
+            ( Date.UTC(+userList.data?.date?.now!.toString().split('T')[0].split('-')[0], +userList.data?.date?.now!.toString().split('T')[0].split('-')[1],+userList.data?.date?.now!.toString().split('T')[0].split('-')[2])
+              - Date.UTC(+userList.data?.date?.start!.toString().split('T')[0].split('-')[0], +userList.data?.date?.start!.toString().split('T')[0].split('-')[1],+userList.data?.date?.start!.toString().split('T')[0].split('-')[2]))
+            / (1000 * 3600 * 24)
+          }} д. )
+        </span>
+      </ng-template>
+    </c-widget-stat-a>
+  </c-col>
+
+  <c-col sm="6" xl="3">
+    <c-widget-stat-a [title]="'Инвестиции'" color="info">
+      <ng-template cTemplateId="widgetValueTemplate" ngPreserveWhitespaces>
+        <span>$ {{ Math.floor(+userList.data?.balance?.noIncome!) }}</span>
+        <span class="fw-normal" style="font-size: 14px;">
+          ( {{ formatDate(userList.data?.date?.start!, 'dd.MM.yyyy', 'en') }} )
+        </span>
+      </ng-template>
+
+    </c-widget-stat-a>
+  </c-col>
+
+  <c-col sm="6" xl="3">
+    <c-widget-stat-a [title]="'Средняя годовая прибыль'" color="secondary">
+
+      <ng-template cTemplateId="widgetValueTemplate" ngPreserveWhitespaces>
+        <span>$ {{ userList.data?.profit?.percent! == 0 ? 0 : Math.floor(+(userList.data?.profit?.balance!) / userList.data?.profit?.percent! * userList.data?.profit?.yearPercent!) }}</span>
+        <span class="fw-normal" style="font-size: 14px;">
+          <svg cIcon [name]="userList.data?.profit?.yearPercent! > 0 ? 'cilArrowTop' : userList.data?.profit?.yearPercent! < 0 ? 'cilArrowBottom' : ''" size="sm"></svg>
+          ( {{ userList.data?.profit?.yearPercent!.toFixed(1) }} % )
+        </span>
+      </ng-template>
+    </c-widget-stat-a>
+  </c-col>
+</c-row>

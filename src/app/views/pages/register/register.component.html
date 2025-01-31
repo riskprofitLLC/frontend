@@ -1,0 +1,35 @@
+<div class="bg-light dark:bg-transparent min-vh-100 d-flex flex-row align-items-center">
+  <c-container>
+    <c-row class="justify-content-center">
+      <c-col lg="7" md="9" xl="6">
+        <c-card class="mx-4">
+          <c-card-body class="p-4">
+            <form cForm>
+              <h1>Register</h1>
+              <p class="text-body-secondary">Create user account</p>
+              <c-input-group class="mb-3">
+                <span cInputGroupText><svg cIcon name="cilUser"></svg></span>
+                <input name="name" [(ngModel)]="registerObj.name" autoComplete="name" cFormControl placeholder="Name" />
+              </c-input-group>
+              <c-input-group class="mb-3">
+                <span cInputGroupText><svg cIcon name="cilLowVision"></svg></span>
+                <input name="role" [(ngModel)]="registerObj.role" autoComplete="role" cFormControl placeholder="Role" />
+              </c-input-group>
+              <c-input-group class="mb-3">
+                <span cInputGroupText><svg cIcon name="cilCash"></svg></span>
+                <input name="balance" [(ngModel)]="registerObj.balance" autoComplete="balance" cFormControl placeholder="Balance" type="number" />
+              </c-input-group>
+              <c-input-group class="mb-4">
+                <span cInputGroupText><svg cIcon name="cilLockLocked"></svg></span>
+                <input name="password" [(ngModel)]="registerObj.password" autoComplete="password" cFormControl placeholder="Password" />
+              </c-input-group>
+              <div class="d-grid">
+                <button (click)="onRegister()" cButton color="success">Create User</button>
+              </div>
+            </form>
+          </c-card-body>
+        </c-card>
+      </c-col>
+    </c-row>
+  </c-container>
+</div>
