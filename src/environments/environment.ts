@@ -1,4 +1,4 @@
 export const environment = {
 	production: true,
-	serverUrl: 'https://backend-nine-sandy-98.vercel.app/'
+	serverUrl: 'http://194.113.245.34:3000/'
 }
